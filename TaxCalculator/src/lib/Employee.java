@@ -1,5 +1,6 @@
 package lib;
 
+import java.util.Date;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.LinkedList;
@@ -13,9 +14,7 @@ public class Employee {
 	private String idNumber;
 	private String address;
 	
-	private int yearJoined;
-	private int monthJoined;
-	private int dayJoined;
+	private Date yearJoined;
 	private int monthWorkingInYear;
 	
 	private boolean isForeigner;
@@ -31,15 +30,13 @@ public class Employee {
 	private List<String> childNames;
 	private List<String> childIdNumbers;
 	
-	public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, int yearJoined, int monthJoined, int dayJoined, boolean isForeigner, boolean gender) {
+	public Employee(String employeeId, String firstName, String lastName, String idNumber, String address, Date yearJoined, boolean isForeigner, boolean gender) {
 		this.employeeId = employeeId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.idNumber = idNumber;
 		this.address = address;
 		this.yearJoined = yearJoined;
-		this.monthJoined = monthJoined;
-		this.dayJoined = dayJoined;
 		this.isForeigner = isForeigner;
 		this.gender = gender;
 		
@@ -52,18 +49,20 @@ public class Employee {
 	 * Jika pegawai adalah warga negara asing gaji bulanan diperbesar sebanyak 50%
 	 */
 	
-	public void setMonthlySalary(int grade) {	
-		if (grade == 1) {
-			monthlySalary = 3000000;
-		}else if (grade == 2) {
-			monthlySalary = 5000000;
-		}else if (grade == 3) {
-			monthlySalary = 7000000;
-			
-		}if (isForeigner) {
-			monthlySalary = (int) (3000000 * 1.5);
-		}
-	}
+	 public void setMonthlySalary(int grade) {
+        if (grade == 1) {
+            monthlySalary = 3000000;
+
+        } else if (grade == 2) {
+            monthlySalary = 5000000;
+
+        } else if (grade == 3) {
+            monthlySalary = 7000000;
+        }
+        if (isForeigner) {
+            monthlySalary = (int) (3000000 * 1.5);
+        }
+    }
 	
 	public void setAnnualDeductible(int deductible) {	
 		this.annualDeductible = deductible;
@@ -85,11 +84,12 @@ public class Employee {
 	
 	public int getAnnualIncomeTax() {
 		
-		//Menghitung berapa lama pegawai bekerja dalam setahun ini, jika pegawai sudah bekerja dari tahun sebelumnya maka otomatis dianggap 12 bulan.
+		/* Menghitung berapalama pegawai bekerja dalam setahun ini, jika pegawai sudah bekerja dari tahun sebelumnya maka otomatis dianggap 12 bulan.*/
+
 		LocalDate date = LocalDate.now();
 		
-		if (date.getYear() == yearJoined) {
-			monthWorkingInYear = date.getMonthValue() - monthJoined;
+		if (date.getYear() == yearJoined.getYear()) {
+			monthWorkingInYear = date.getMonthValue() - yearJoined.getMonth();
 		}else {
 			monthWorkingInYear = 12;
 		}
