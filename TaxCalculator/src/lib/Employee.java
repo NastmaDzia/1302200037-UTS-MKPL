@@ -24,7 +24,7 @@ public class Employee extends DataEmployee{
 	private DataEmployee spouseIdNumber;
 
 	private List<String> childNames;
-	private List<String> childIdNumbers;
+	private static List<String> childIdNumbers;
 	
 	public Employee(DataEmployee pegawai, Date yearJoined, boolean isForeigner, boolean gender) {
 		this.pegawai = pegawai;
@@ -74,6 +74,9 @@ public class Employee extends DataEmployee{
 		childNames.add(childName);
 		childIdNumbers.add(childIdNumber);
 	}
+	public static int getchildIdNumber(){
+        return childIdNumbers.size();
+    }
 
 	public boolean getgender(){
         return gender;
@@ -93,7 +96,8 @@ public class Employee extends DataEmployee{
 		}else {
 			monthWorkingInYear = 12;
 		}
-		
-		return TaxFunction.calculateTax(monthlySalary, otherMonthlyIncome, monthWorkingInYear, annualDeductible, spouseIdNumber.equals(""), childIdNumbers.size());
+		int gaji = (monthlySalary+otherMonthlyIncome)*monthWorkingInYear;
+
+		return TaxFunction.calculateTax(gaji, annualDeductible, spouseIdNumber.equals(""), Employee.getchildIdNumber());
 	}
 }
