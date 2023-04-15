@@ -50,6 +50,7 @@ public class Employee {
 	 */
 	
 	 public void setMonthlySalary(int grade) {
+		
         if (grade == 1) {
             monthlySalary = 3000000;
 
