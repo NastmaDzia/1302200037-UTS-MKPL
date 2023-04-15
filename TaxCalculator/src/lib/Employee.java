@@ -52,7 +52,8 @@ public class Employee {
 	 * Jika pegawai adalah warga negara asing gaji bulanan diperbesar sebanyak 50%
 	 */
 	
-	public void setMonthlySalary(int grade) {	
+	public void setMonthlySalary(int grade) {
+			
 		if (grade == 1) {
 			monthlySalary = 3000000;
 		}else if (grade == 2) {
